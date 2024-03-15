@@ -9,6 +9,7 @@
            border: 1px solid #000;
            width: 70%;
            border-collapse: collapse;
+          
 
         } 
         th{
@@ -51,6 +52,7 @@ if($total != 0)
 <table>
     <tr>
         <th>ID</th>
+        <th>Photo</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
@@ -65,6 +67,7 @@ if($total != 0)
    {
     echo "<tr>
            <td>".$result['id']."</td>
+           <td><img src='".$result['emp_image']."' width='70px' height=''70px'/></td>
            <td>".$result['fname']."</td>
            <td>".$result['lname']."</td>
            <td>".$result['email']."</td>
@@ -72,7 +75,8 @@ if($total != 0)
            <td>".$result['pass']."</td>
            <td>".$result['cpass']."</td>
            <td><a href='update.php?id=$result[id]'>Update</a>
-           <a href='#'>Delete</a>
+           <a href='delete.php?id=$result[id]'>Delete</a>
+           
            </td>
           </tr> <br>";
    }

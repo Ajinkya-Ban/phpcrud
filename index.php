@@ -22,7 +22,7 @@ include("connection.php");
         </div>
 
         <div class="form-data">
-           <form action="index.php" method="post">
+           <form action="index.php" method="post" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td> <label for="fname">First Name</label></td>
@@ -50,6 +50,11 @@ include("connection.php");
                 </tr>
 
                 <tr>
+                    <td> <label for="photo">Upload photo</label></td>
+                    <td><input type="file" name="uploadfile" required></td>
+                </tr>
+
+                <tr>
                     <td></td>
                     <td><input type="submit" value="Register" name="register"></td>
                 </tr>
@@ -66,6 +71,11 @@ include("connection.php");
 if($_POST['register'])
 {
 
+    $filename = $_FILES["uploadfile"]["name"];
+    $tempname = $_FILES["uploadfile"]["tmp_name"];
+    $folder = "photos/".$filename;
+    move_uploaded_file($tempname,$folder);
+
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
@@ -73,7 +83,7 @@ if($_POST['register'])
     $pass = $_POST['pass'];
     $cpass = $_POST['cpass'];
     
-    $query = "insert into emp(fname, lname, email, mob, pass, cpass) values('$fname','$lname','$email','$mob','$pass','$cpass')";
+    $query = "insert into emp(emp_image,fname, lname, email, mob, pass, cpass) values('$folder','$fname','$lname','$email','$mob','$pass','$cpass')";
     $data = mysqli_query($conn,$query);
 
     if($data)
